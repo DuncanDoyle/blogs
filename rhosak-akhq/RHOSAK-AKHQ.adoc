@@ -128,14 +128,14 @@ If you've set the ACLs on the service account correctly, you will see the topic 
 
 image::images/akhq-topic-created.png[RHOSAK AKHQ]
 
-By clicking on the topic we've just created, we can now inspect messages, produce messages to topic, see the consumer groups that are consuming from the topic, inspect their consumer-lag, etc.
+By clicking on the topic we've just created, we can now inspect messages, produce messages to topic, see the consumer groups that are consuming from the topic, inspect their consumer-lag, etc. Some examples are shown in the images below.
 
 image::images/akhq-messages.png[AKHQ Messages]
 
 image::images/akhq-topic-consumer-groups.png[AKHQ Topic Consumer Groups]
 
 
-More information about AKHQ can be found in the https://akhq.io/docs/[AKHQ documentation]
+More information about AKHQ can be found in the https://akhq.io/docs/[AKHQ documentation].
 
 # Conclusion
 
