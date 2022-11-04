@@ -1,8 +1,8 @@
-# Managing OpenShift Streams for Apache Kafka with 
+# Managing OpenShift Streams for Apache Kafka with AKHQ
 
-Apache Kafka ® has quickly become the defacto event streaming platform, enabling organizations to unlock and use their data in new and innovative ways in near real time. This has opened numerous new use-cases that allows these companies to bring more value to their products by being able to quicker and more accurately respond to change.
+Apache Kafka has quickly become the defacto event streaming platform, enabling organizations to unlock and use their data in new and innovative ways in near real time. This has opened numerous new use-cases that allows these companies to bring more value to their products by being able to quicker and more accurately respond to change.
 
-From a high-level perspective, Apache Kafkas architecture is quite simple and based on a small number of concepts like brokers, topics, partitions, producers and consumers. When deploying, operating, managing and monitoring a production Kafka cluster, things can become, as with any system, complex quite quickly. In order to effectively use and manage a Kafka cluster in both development and production environments, there are numerous tools on the market, both commercial and open source. These tools range from scripts, to powerful CLIs (command line interfaces), to GUIs (graphical user interfaces), to full monitoring, management and governance platforms. Each of these tools serves a purpose in part of the softwarde development cycle, and therefore its impossible to answer questions which of these tools is the best when it comes to operating Apache Kafka.
+From a high-level perspective, Apache Kafka's architecture is quite simple and based on a small number of concepts like brokers, topics, partitions, producers and consumers. When deploying, operating, managing and monitoring a production Kafka cluster, things can become, as with any system, complex quite quickly. In order to effectively use and manage a Kafka cluster in both development and production environments, there are numerous tools on the market, both commercial and open source. These tools range from scripts, to powerful CLIs (command line interfaces), to GUIs (graphical user interfaces), to full monitoring, management and governance platforms. Each of these tools serves a purpose in part of the softwarde development cycle, and therefore its impossible to answer questions which of these tools is the best when it comes to operating Apache Kafka.
 
 In this blog post we will take a look at https://akhq.io[AKHQ], an open source Kafka GUI for Apache Kafka ® to manage topics, topics data, consumers group, schema registry, connect and more. At Red Hat, we often get the question what kind of consoles and GUIs can be used with our Kafka products, Red Hat AMQ Streams and Red Hat OpenShift Streams for Apache Kafka. Since our products are fully based on the upstream Apache Kafka project, most of the available consoles and GUIs work with our Kafka products. Today we will show to connect AKHQ to a Red Hat OpenShift Streams for Apache Kafka managed cloud service. Using our free 48 hours trial of OpenShift Streams, you will be able to follow along with this blog post, and by the end manage your OpenShift Streams for Apache Kafka with AKHQ.
 
@@ -65,7 +65,7 @@ There are multiple ways in which you can run AKHQ. The https://akhq.io/docs/inst
 
 The AKHQ configuration that we will use in this example is a very basic configuration that demonstrates how to connect to an OpenShift Streams Kafka instance using SASL/OAUTHBEARER authentication, using the Client ID and Client Secret of the service account we created earlier. The configuration looks as follows:
 
-~~~
+```
 akhq:
   # list of kafka cluster available for akhq
   connections:
@@ -80,7 +80,7 @@ akhq:
             oauth.client.secret="${CLIENT_SECRET}" 
             oauth.token.endpoint.uri="${OAUTH_TOKEN_ENDPOINT_URI}" ;
         sasl.login.callback.handler.class: io.strimzi.kafka.oauth.client.JaasClientOauthLoginCallbackHandler
-~~~
+```
 
 Note that we're using the OauthLoginCallbackHandler from the https://strimzi.io/[Strimzi project], which is packaged by default with AKHQ, to use OAuthBearer authentication against OpenShift Streams.
 
@@ -88,35 +88,35 @@ We use this same configuration in the `docker-compose.yml` file we will use to r
 
 To run AKHQ and connect it to your OpenShift Streams instance, we will first clonse the GitHub repisory with our `docker-compose.yml` file.
 
-~~~
+```
 $ git clone https://github.com/DuncanDoyle/rhosak-akhq-blog.git
 $ cd rhosak-akhq-blog
-~~~
+```
 
 Next, we need to set a number of environment variables that will hold the value of our service account's client id and client secret, the oauth token endpoint uri, and the url and port of the bootstrap server of our Kafka instance. The boostrap server url can be retrieved via the OpenShift Streams for Apache Kafka UI, or by using the `rhoas kafka describe` CLI command. The oauth token endpoint url can be found in the same way, but we can simply set it to `https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token` as it is a static value.
 
 image::images/rhosak-bootstrap-server.png[RHOSAK Bootstrap Server]
 
-~~~
+```
 $ export CLIENT_ID={your-service-account-client-id}
 $ export CLIENT_SECRET={your-service-account-client-secret}
 $ export BOOTSTRAP_SERVER={your-kafka-bootstrap-server-url-and-port}
 $ export OAUTH_TOKEN_ENDPOINT_URI=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token 
-~~~
+```
 
 We can now start AKHQ using `docker-compose` or `podman-compose`:
 
-~~~
+```
 $ docker-compose up
-~~~
+```
 
 The AKHQ management console will be available at http://localhost:8080
 
 If you've configured everything correctly, you should see the `openshift-streams-kafka` connection when hovering over the datastore icon.
 
-image::images/rhosak-bootstrap-server.png[RHOSAK AKHQ]
+image::images/rhosak-akhq-empty.png[RHOSAK AKHQ]
 
-# Working with OpenShift Streams
+# Managing OpenShift Streams
 
 With our management console connected, we can create a topic, produce some data, and inspect the data we've produced to the topic.
 
@@ -129,6 +129,11 @@ If you've set the ACLs on the service account correctly, you will see the topic 
 image::images/akhq-topic-created.png[RHOSAK AKHQ]
 
 By clicking on the topic we've just created, we can now inspect messages, produce messages to topic, see the consumer groups that are consuming from the topic, inspect their consumer-lag, etc.
+
+image::images/akhq-messages.png[AKHQ Messages]
+
+image::images/akhq-topic-consumer-groups.png[AKHQ Topic Consumer Groups]
+
 
 More information about AKHQ can be found in the https://akhq.io/docs/[AKHQ documentation]
 
