@@ -168,7 +168,7 @@ image::images/akhq-messages.png[AKHQ Messages]
 +
 .Viewing consumer groups in the AKHQ web console
 image::images/akhq-topic-consumer-groups.png[AKHQ Topic Consumer Groups]
-+
+
 For more information about AKHQ, see the https://akhq.io/docs/[AKHQ documentation].
 
 ## Conclusion
