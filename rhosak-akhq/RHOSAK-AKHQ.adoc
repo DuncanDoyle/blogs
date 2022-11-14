@@ -160,14 +160,17 @@ If you have set ACL permissions on the service account correctly, you see the to
 +
 .Viewing the same topic in the AKHQ and OpenShift Streams web consoles
 image::images/akhq-topic-created.png[RHOSAK AKHQ]
+
+. To perform tasks such as inspecting and producing messages, viewing consumer groups, inspecting consumer lag, and so on, click your new topic in the AKHQ console. Some examples are shown in the following figures:
 +
-If you click your new topic in the AKHQ console, you can now inspect messages, produce messages to the topic, see consumer groups that are consuming from the topic, inspect consumer lag, and so on. Some examples are shown in the following figures:
-+
+--
 .Viewing Kakfa messages in the AKHQ web console
 image::images/akhq-messages.png[AKHQ Messages]
-+
+
+
 .Viewing consumer groups in the AKHQ web console
 image::images/akhq-topic-consumer-groups.png[AKHQ Topic Consumer Groups]
+--
 
 For more information about AKHQ, see the https://akhq.io/docs/[AKHQ documentation].
 
