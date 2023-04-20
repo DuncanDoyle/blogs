@@ -29,6 +29,8 @@ Gloo Gateway is a feature-rich, Kubernetes-native ingress controller and next-ge
 
 By using Gloo Gateways capabilities like authentication, authorization, rate limiting and monitoring, combined with a Kafka HTTP bridge/proxy, we can expose our Kafka environment in a secured, controlled and managed way to consumers. Second, by exposing Kafka over HTTP, Kafka clients no longer need to be available for your programming language of choice. This allows any system that can communicate over HTTP to interact with the Kafka environment, both producing events to the platform, as well as consuming event streams. This opens interesting new  possibilities and architectures in which event streams can be directly exposed to external consumers to implement realtime event-based systems.
 
+image::images/GlooGateway-Kafka.png[Gloo Gateway, Strimzi HTTP Bridge and Apache Kafka]
+
 
 ## Exposing Apache Kafka over HTTP using the Strimzi Kafka Bridge
 
