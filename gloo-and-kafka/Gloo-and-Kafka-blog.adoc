@@ -554,8 +554,8 @@ curl -v --location 'http://kafka.example.com/topics/orders' -H 'api-key:N2YwMDIx
 '{
    "records":[
       {
-         "key":"orderId34,
-         "value":{ "productId":"987cba" }
+         "key":"orderId3",
+         "value":{ "productId":"345str" }
       }
    ]
 }'
